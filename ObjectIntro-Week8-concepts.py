@@ -1,5 +1,9 @@
 #
+#  Linked List creation exercise
+#  Author: Daniel Wroblewski
+#  Date: 7/5/2025
 #
+#  Status: In development
 #
 #
 #
