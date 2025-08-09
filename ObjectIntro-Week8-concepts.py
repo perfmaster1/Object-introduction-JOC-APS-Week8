@@ -22,11 +22,25 @@ class Node(object):
     def set_next(self, new_next):
         self.next_node = new_next
 
+def printnodes(index,mnode,eflag,tstmsg):
+    idx=index
+    mynode = mnode
+    endflag=eflag
+    print(tstmsg)
+#    while mynode.next_node:  # is not None and mynode.data is not None:
+    while mynode.get_data() and not endflag:
+        print(mynode.get_data()," --> ",end="")
+        mynode=mynode.get_next()
+        idx += 1
+        if mynode.next_node is None:
+            endflag=True
+            print(mynode.get_data())
+    exit
+
+
 def main():
     new_node = Node("first node data")
     next_node = Node("second node data", new_node)
-    print(next_node.get_data())
-
     nodelist = ["First node","Second node","Third node","Fourth node"]
 
     if len(list(nodelist)) < 2:
@@ -34,38 +48,54 @@ def main():
         exit(1)
     
 #
-#   Building the linked list: 
-#    tested ok. 
+#  New attempt 7/9/2025
+#   Building dnode")
+    dnode = Node(nodelist[0])
+    dnode.set_next(nodelist[2])
 
-    for idx, item in enumerate(nodelist):
-        if idx == 0:
-            headnode = Node(nodelist[idx],nodelist[idx+1])
-            curnode = headnode
-            print("Head is:", headnode.data,headnode.next_node)
-        elif idx == (len(nodelist) - 1):    # last node w/null pointer
-            curnode = Node(nodelist[idx])
-        else:
-            curnode = Node(nodelist[idx],nodelist[idx+1])
-        print("Current node is:", curnode.data,curnode.next_node)
+    newnode=Node(nodelist[2])
+    Node.set_next(dnode,newnode)
 
+    mynode=dnode.get_next()
+    newnode3=Node(nodelist[3])
+    Node.set_next(mynode,newnode3)
+    mynode2=mynode.get_next()
 #
-#  Traversed the linked list structure
+#  more efficient attempt: 
 #
-    curnode=headnode
-    idx=0
-    while Node.get_next(curnode) is not None:
-        print("got one")
-        idx += 1
-        curnode=Node.get_next(curnode)
-        if idx > 6:
-            print("exiting - too many")
-            exit
+    fnode = Node(nodelist[0])
+    newnode2 =  Node(nodelist[1])
+    fnode.set_next(newnode2)
     
-    #     print("linked list node # ",idx," is ",Node.get_data(curnode))
-    #     curnode=Node.get_next(curnode)
-    #     idx += 1
-    # print("Node structure length is ",idx)
+    cur2node=newnode2
+    new2node =  Node(nodelist[2])
+    cur2node.set_next(new2node)
 
+    cur2node=new2node
+    new2node =  Node(nodelist[3])
+    cur2node.set_next(new2node)
+#
+#  now print off the nodes:
+#
+    idx=1 
+    mynode = fnode
+    endflag=False
+    testmsg="Testing the structure"
+#
+#  Testing status of creation of nodes and the structure: 
+#
+#    while mynode.next_node:  # is not None and mynode.data is not None:
+    printnodes(idx,mynode,endflag,testmsg)
+# 
+# Project Parameter: Create a function to print ANY length list, given its head node and test
+#             
+#    print("Function printnodes")
+    idx=0
+    mynode = fnode
+    endflag=False
+    testmsg="Function printnodes result:"
+    printnodes(idx,mynode,endflag,testmsg)
+    exit
 
 
 main()
