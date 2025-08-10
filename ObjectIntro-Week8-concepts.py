@@ -156,7 +156,7 @@ def main():
     print("     Node count created: ",inodes," list count: ",len(nodelist))
     if inodes != listcount:
         print(" !!!!!ERROR: Not all nodes created, exiting !!!!!\n")
-        return(-1)
+        return(-1) 
     
 #--------------------------------------------------------------
 #  Testing status of creation of nodes and the structure: 
