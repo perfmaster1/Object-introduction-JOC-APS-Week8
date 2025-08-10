@@ -1,3 +1,4 @@
+#+++==========================================================================================
 #
 #  Linked List creation exercise
 #  Author: Daniel Wroblewski
@@ -6,7 +7,7 @@
 #  Status: In development
 #
 #
-#
+#+++==========================================================================================
 
 #==========================================================================================
 #   Node class definition and methods:
@@ -28,30 +29,50 @@ class Node(object):
         self.next_node = new_next
 
 #==========================================================================================
+#   ll_Nodes_Create: Create the linked list structure with inputs of head and list
+#   Variables:
+#       fitem - the head node
+#       llist - the list to create the linked list nodes from
+#==========================================================================================
+def ll_Nodes_Create(fitem,llist):
+    maxindex=len(llist)-1
+    i=0
+    fitem=Node(llist[i])           # head node
+    curitem = fitem
+    for istr in llist:
+        if i < maxindex:
+            i+=1
+            curitem2=Node(llist[i])
+            curitem.set_next(curitem2)
+            curitem=curitem2
+    return fitem
+
+
+#==========================================================================================
 #   find_node: Find the node to remove and bypass it within the data structure
 #==========================================================================================
 def find_node(head=None,remove=None):
     cur_node=head
     prev_node=head
-#--------------------------------------------------
+#-------------------------------------------------------------------------
 #  If node to remove is head, then change the node head is pointed to: 
-#--------------------------------------------------
-    if head==remove and head is not None:
+#-------------------------------------------------------------------------
+    if head.get_data()==remove.get_data() and head is not None:
         newhead=head.next_node
         return newhead 
 #--------------------------------------------------
 #   Locate the node to remove, if exists: 
-#----***----------------------------------------------
-    while cur_node.get_data() != remove.get_data() and cur_node.next_node is not None:
+#-------------------------------------------------- 
+    while cur_node.get_data() != remove.get_data() and cur_node.get_next() is not None:
         prev_node=cur_node
-        cur_node=cur_node.next_node
+        cur_node=cur_node.get_next() 
 #--------------------------------------------------
-#  If at end of linked list and 
-#  not found the value then no changes to list: 
+#  If at end of linked list and did not find the
+#    value then no changes to list: 
 #--------------------------------------------------
-    if cur_node.next_node is None or head is None:
+    if cur_node.get_next() is None or head is None:
         return head
-    prev_node.next_node=cur_node.next_node   # cuts out cur_node from the linked list
+    prev_node.next_node=cur_node.get_next()   # cuts out cur_node from the linked list
     return head
 
 #==========================================================================================
@@ -84,25 +105,15 @@ def printnodes(index,mnode,eflag,tstmsg):
 #========================================================================================== 
 
 def main():
-    new_node = Node("first node data")
-    next_node = Node("second node data", new_node)
+
     nodelist = ["First node","Second node","Third node","Fourth node"]
 
     if len(list(nodelist)) < 2:
         print("The list is too small it has ",len(nodelist)," items. Ending execution")
         exit(1)
-    
-    fnode = Node(nodelist[0])
-    newnode2 =  Node(nodelist[1])
-    fnode.set_next(newnode2)
-    
-    cur2node=newnode2
-    new2node =  Node(nodelist[2])
-    cur2node.set_next(new2node)
 
-    cur2node=new2node
-    new2node =  Node(nodelist[3])
-    cur2node.set_next(new2node)
+    fnode = ll_Nodes_Create(nodelist[0],nodelist)
+     
 #--------------------------------------------------
 #  now print off the nodes:
 #--------------------------------------------------
