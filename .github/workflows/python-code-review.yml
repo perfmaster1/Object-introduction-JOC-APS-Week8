@@ -45,6 +45,3 @@ jobs:
         uses: marocchino/sticky-pull-request-comment@v2
         with:
           path: flake8.log
-        uses: marocchino/sticky-pull-request-comment@v2
-        with:
-          path: flake8.log
